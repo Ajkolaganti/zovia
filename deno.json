@@ -1,0 +1,21 @@
+{
+  "imports": {
+    "puppeteer": "npm:puppeteer@^22.10.0",
+    "@supabase/supabase-js": "npm:@supabase/supabase-js@2.39.0"
+  },
+  "nodeModulesDir": "auto",
+  "compilerOptions": {
+    "lib": ["deno.window"]
+  },
+  "lint": {
+    "files": {
+      "include": ["supabase/functions/"],
+      "exclude": ["supabase/functions/_shared/supabaseClient.ts"]
+    }
+  },
+  "fmt": {
+    "files": {
+      "include": ["supabase/functions/"]
+    }
+  }
+} 
