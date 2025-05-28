@@ -48,7 +48,7 @@ export default function SettingsPage() {
       startTime: "09:00",
       endTime: "17:00",
       timezone: "America/New_York",
-      maxApplicationsPerDay: "50",
+      maxApplicationsPerDay: 50,
       enableWeekends: false,
     },
   })
