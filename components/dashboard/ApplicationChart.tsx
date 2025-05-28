@@ -36,7 +36,13 @@ export default function ApplicationChart({ userId }: { userId: string }) {
         .order('application_date', { ascending: true })
       
       if (applications) {
-        const groupedData: Record<string, Record<string, number>> = {}
+        const groupedData: Record<string, {
+            LinkedIn: number;
+            Monster: number;
+            ZipRecruiter: number;
+            Indeed: number;
+            [platformName: string]: number;
+        }> = {}
         
         applications.forEach(app => {
           const date = new Date(app.application_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
@@ -45,18 +51,21 @@ export default function ApplicationChart({ userId }: { userId: string }) {
               LinkedIn: 0,
               Monster: 0,
               ZipRecruiter: 0,
-              Indeed: 0
+              Indeed: 0,
             }
           }
           groupedData[date][app.platform] = (groupedData[date][app.platform] || 0) + 1
         })
         
-        const chartData = Object.entries(groupedData).map(([date, platforms]) => ({
+        const chartDataArray: ApplicationData[] = Object.entries(groupedData).map(([date, platformCounts]) => ({
           date,
-          ...platforms
-        }))
+          LinkedIn: platformCounts.LinkedIn || 0,
+          Monster: platformCounts.Monster || 0,
+          ZipRecruiter: platformCounts.ZipRecruiter || 0,
+          Indeed: platformCounts.Indeed || 0,
+        }));
         
-        setData(chartData)
+        setData(chartDataArray)
       }
     }
     

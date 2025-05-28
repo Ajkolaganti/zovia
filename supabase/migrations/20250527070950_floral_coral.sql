@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS profiles (
 -- Create resumes table
 CREATE TABLE IF NOT EXISTS resumes (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  user_id UUID NOT NULL UNIQUE REFERENCES auth.users(id) ON DELETE CASCADE,
   file_name TEXT NOT NULL,
   file_type TEXT NOT NULL,
   file_path TEXT NOT NULL,
